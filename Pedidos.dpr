@@ -3,7 +3,8 @@ program Pedidos;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  uMenuPrincipal in 'uMenuPrincipal.pas' {Form4};
+  uMenuPrincipal in 'uMenuPrincipal.pas' {Form4},
+  uConnect in 'uConnect.pas';
 
 {$R *.res}
 

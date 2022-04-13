@@ -1,0 +1,44 @@
+unit uConnect;
+
+interface
+Uses
+FireDAC.Phys.FB, FireDAC.Comp.Client, System.Classes;
+
+type
+Conect = class(TComponent)
+  FBDriver: TFDPhysFBDriverLink;
+  Conn: TFDConnection;
+  public
+  function conectar() : Boolean;
+  constructor Create(AOwner: TComponent); override;
+  destructor Destroy();
+end;
+
+implementation
+{ Conect }
+
+function Conect.conectar: Boolean;
+begin
+  Conn := TFDConnection.Create(self);
+  FBDriver := TFDPhysFBDriverLink.Create(self);
+  FBDriver.VendorLib   := '.\fbclient.dll';
+  Conn.Params.DriverID := 'FB';
+  Conn.Params.Database := '.\DataBase\DB.IB';
+  Conn.Params.UserName := 'SYSDBA';
+  Conn.Params.Password := 'masterkey';
+  Conn.Open();
+
+end;
+
+constructor Conect.Create(AOwner: TComponent);
+begin
+  inherited;
+
+end;
+
+destructor Conect.Destroy;
+begin
+
+end;
+
+end.

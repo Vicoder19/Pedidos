@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2022/04/12 19:33:42.678,=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
-    <Transaction>2022/04/12 19:34:18.662,D:\AulasDelphi\Pedidos\uMenuPrincipal.pas=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
-    <Transaction>2022/04/12 19:34:18.662,D:\AulasDelphi\Pedidos\uMenuPrincipal.fmx=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Unit4.fmx</Transaction>
-    <Transaction>2022/04/12 19:34:25.335,D:\AulasDelphi\Pedidos\Pedidos.dproj=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Project4.dproj</Transaction>
+	<Transactions>
+    <Transaction>2022/04/12 19:33:42.000.678,=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2022/04/12 19:34:18.000.662,D:\AulasDelphi\Pedidos\uMenuPrincipal.pas=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2022/04/12 19:34:18.000.662,D:\AulasDelphi\Pedidos\uMenuPrincipal.fmx=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Unit4.fmx</Transaction>
+    <Transaction>2022/04/12 19:34:25.000.335,D:\AulasDelphi\Pedidos\Pedidos.dproj=C:\Users\vicar\Documents\Embarcadero\Studio\Projects\Project4.dproj</Transaction>
+    <Transaction>2022/04/12 20:25:27.474,=D:\AulasDelphi\Pedidos\Unit1.pas</Transaction>
+    <Transaction>2022/04/12 20:30:05.360,D:\AulasDelphi\Pedidos\uConnect.pas=D:\AulasDelphi\Pedidos\Unit1.pas</Transaction>
   </Transactions>
-  <ActiveMobileDevice>   <NoProfile iOSSimulator="iPhone5"/>
-  </ActiveMobileDevice>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
 </BorlandProject>
