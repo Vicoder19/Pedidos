@@ -69,8 +69,6 @@ end.
   vfLinkgridProd.AutoActivate := False;
   vfLinkgridProd.Active       := False;
 
-  if pQtdeDecimais_Max6 in [1,2] then
-        TFloatField(vpCdsPreenchido.FieldByName(pNomeCampoFloat)).DisplayFormat  :=  '###,###,##0.00';
 }
 
 
