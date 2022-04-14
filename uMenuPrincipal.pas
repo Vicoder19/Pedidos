@@ -48,6 +48,29 @@ end;
 
 end.
 
+{
+  vfLinkgridProd             := TLinkGridToDataSource.Create(BindingsList1);
+  vfLinkgridProd.Name        := 'LCdsProdutos';
+  vfLinkgridProd.GridControl := GridProdutos;
+  vfLinkgridProd.DataSource  := BSProdutos;
+
+  vfLinkgridProd.Columns.Add.Header := 'Código';
+  vfLinkgridProd.Columns.Add.Header := 'Descrição';
+  vfLinkgridProd.Columns.Add.Header := 'Nº Solicitações';
+
+  vfLinkgridProd.columns[0].MemberName := 'cp_id';
+  vfLinkgridProd.columns[1].MemberName := 'cp_descricao';
+  vfLinkgridProd.Columns[2].MemberName := 'cp_qtde_procurado';
+
+  vfLinkgridProd.Columns[0].Width := 100;
+  vfLinkgridProd.Columns[1].Width := 400;
+  vfLinkgridProd.Columns[2].Width := 100;
+
+  vfLinkgridProd.AutoActivate := False;
+  vfLinkgridProd.Active       := False;
+
+}
+
 
 
 

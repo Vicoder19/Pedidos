@@ -4,8 +4,7 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   uMenuPrincipal in 'uMenuPrincipal.pas' {Form4},
-  uConnect in 'uConnect.pas',
-  uBinds in 'uBinds.pas';
+  uConnect in 'uConnect.pas';
 
 {$R *.res}
 
