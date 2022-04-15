@@ -12,7 +12,7 @@ TBinds = class
   LinkPropertyToField  : TLinkPropertyToField;
   BindingsList         : TBindingsList;
 public
-  constructor Create(pDataSet : TObject);
+  constructor Create(pDataSet : TClientDataSet);
   destructor Destroy; override;
 
   procedure BindControlToField(pControl: TComponent; pField : string);

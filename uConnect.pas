@@ -3,9 +3,10 @@ unit uConnect;
 interface
 Uses
 FireDAC.Phys.FB, FireDAC.Comp.Client, System.Classes, FireDAC.DApt, FireDAC.Stan.Def, Datasnap.Provider,
-  Datasnap.DBClient;
+  Datasnap.DBClient, System.StrUtils;
 
 type
+TStatus = (Insert, Edit, Default);
 TConnection = class(TComponent)
   FBDriver: TFDPhysFBDriverLink;
   Conn: TFDConnection;
@@ -14,6 +15,7 @@ TConnection = class(TComponent)
   public
   function conectar() : Boolean;
   function execQuery(pSQL : string; pCds : TClientDataSet) : boolean;
+  function nextId(pTabela, pCampo : string) : Integer;
   constructor Create(AOwner: TComponent); override;
   destructor Destroy();
 end;
@@ -46,6 +48,7 @@ begin
   Conn     := TFDConnection.Create(self);
   FBDriver := TFDPhysFBDriverLink.Create(self);
   Trans    := TFDTransaction.Create(self);
+  Provider := TDataSetProvider.Create(Self);
 
 end;
 
@@ -70,13 +73,33 @@ begin
     Query.Transaction := Conn.Transaction;
     Query.SQL.Text := pSQL;
 
-    Query.Open(pSQL);
-
-    Provider.DataSet := Query;
-    pCds.Data := Provider.Data;
+    if (AnsiContainsStr(pSQL,'RETURNING')) or (AnsiContainsStr(pSQL, 'SELECT')) then
+    begin
+      Query.Open(pSQL);
+      Provider.DataSet := Query;
+      pCds.Data := Provider.Data;
+    end
+    else
+      Query.ExecSQL;
 
   finally
     Freeandnil(Query);
+  end;
+
+end;
+
+function TConnection.nextId(pTabela, pCampo: string): Integer;
+var
+Sql : string;
+Cds : TClientDataSet;
+begin
+  try
+    Cds := TClientDataSet.Create(nil);
+    Sql := 'SELECT MAX(' + pCampo + ') FROM ' + pTabela;
+    execQuery(Sql, Cds);
+    Result := Cds.FieldByName(pCampo).AsInteger + 1;
+  finally
+    FreeAndNil(Cds);
   end;
 
 end;
