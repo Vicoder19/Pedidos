@@ -1,0 +1,28 @@
+object frmMenu: TfrmMenu
+  Left = 0
+  Top = 0
+  Caption = 'Menu'
+  ClientHeight = 323
+  ClientWidth = 594
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object mm1: TMainMenu
+    Left = 8
+    Top = 280
+    object Menu: TMenuItem
+      Text = 'Menu'
+      object miItens: TMenuItem
+        Locked = True
+        Text = 'Itens'
+        OnClick = miItensClick
+      end
+      object miPedidos: TMenuItem
+        Locked = True
+        Text = 'Pedidos'
+      end
+    end
+  end
+end

@@ -1,0 +1,189 @@
+﻿unit uPedidos;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, System.Rtti,
+  Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs,
+  Fmx.Bind.Editors, Data.Bind.Components, Data.Bind.DBScope, Data.DB,
+  Datasnap.DBClient, Data.Bind.Grid, System.Actions, FMX.ActnList, FMX.Layouts,
+  FMX.Grid, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Edit, uConnect, uBinds;
+
+type
+  TFrmPedidos = class(TForm)
+    edtCod: TEdit;
+    btnAdd: TButton;
+    btnEditar: TButton;
+    btnExcluir: TButton;
+    btnSalvar: TButton;
+    Label2: TLabel;
+    ActionList1: TActionList;
+    actSair: TAction;
+    BindingsList1: TBindingsList;
+    cdsProdutos: TClientDataSet;
+    BSprodutos: TBindSourceDB;
+    Label1: TLabel;
+    edtDescricao: TEdit;
+    grdProd: TGrid;
+    LinkGridToDataSourceBSprodutos: TLinkGridToDataSource;
+    btnIncluir: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btnAddClick(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
+    procedure actSairExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure edtCodExit(Sender: TObject);
+  private
+  Bind : TBinds;
+  Conn : TConnection;
+    { Private declarations }
+  public
+    { Public declarations }
+  Status : TStatus;
+  procedure controlaBotoes();
+  procedure bindCampos();
+  function validaProduto() : Boolean;
+  end;
+
+var
+  FrmPedidos: TFrmPedidos;
+
+implementation
+
+{$R *.fmx}
+
+{ TForm1 }
+
+procedure TFrmPedidos.actSairExecute(Sender: TObject);
+begin
+  if (Status in [Insert, Edit]) then
+  begin
+    CdsProdutos.Cancel;
+    Status := Default;
+    ControlaBotoes();
+  end;
+end;
+
+procedure TFrmPedidos.bindCampos;
+begin
+  Bind.BindControlToField(edtDescricao, 'DESCITEM');
+  Bind.BindControlToField(edtCod, 'IDITEM');
+  Bind.AtivaBind(True);
+end;
+
+procedure TFrmPedidos.btnEditarClick(Sender: TObject);
+begin
+  if CdsProdutos.RecordCount > 0 then
+  begin
+    Status := Edit;
+    ControlaBotoes();
+    CdsProdutos.Edit;
+    edtDescricao.SetFocus;
+  end;
+end;
+
+procedure TFrmPedidos.btnAddClick(Sender: TObject);
+begin
+  cdsProdutos.Post;
+  Status := Default;
+  controlaBotoes();
+end;
+
+procedure TFrmPedidos.btnIncluirClick(Sender: TObject);
+begin
+  Status := Insert;
+  ControlaBotoes();
+  CdsProdutos.Append;
+  edtDescricao.SetFocus;
+end;
+
+procedure TFrmPedidos.controlaBotoes;
+begin
+  case Status of
+    Insert:
+    begin
+      btnEditar.Enabled  := False;
+      btnIncluir.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnSalvar.Enabled  := False;
+      btnAdd.Enabled     := True;
+    end;
+    Edit:
+    begin
+      btnEditar.Enabled  := False;
+      btnIncluir.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnSalvar.Enabled  := True;
+    end;
+    Default:
+    begin
+      btnEditar.Enabled  := True;
+      btnIncluir.Enabled := True;
+      btnExcluir.Enabled := True;
+      btnSalvar.Enabled  := True;
+    end;
+
+  end;
+end;
+
+procedure TFrmPedidos.edtCodExit(Sender: TObject);
+begin
+  if (Status in [Edit, Insert]) then
+  begin
+    if not validaProduto() then
+    begin
+      (TEdit(Sender) as IControl).DoEnter;
+      abort
+    end;
+  end;
+end;
+
+procedure TFrmPedidos.FormCreate(Sender: TObject);
+begin
+  Conn           := TConnection.Create(self);
+  Conn.conectar;
+  Bind           := TBinds.Create(CdsProdutos);
+  Status         := Default;
+end;
+
+procedure TFrmPedidos.FormShow(Sender: TObject);
+var
+Sql : string;
+begin
+  ControlaBotoes();
+  Sql := 'SELECT * FROM PEDIDOCAB WHERE IDPEDIDOCAB = 0';
+  Conn.execQuery(Sql, CdsProdutos);
+  BindCampos();
+  grdProd.Columns[0].Width := 100;
+  grdProd.Columns[1].Width := 220;
+end;
+
+function TFrmPedidos.validaProduto: Boolean;
+var
+Sql : string;
+pCdsAux : TClientDataSet;
+begin
+  try
+    if edtCod.Text.Trim <> EmptyStr then
+    begin
+      Sql := 'SELECT * FROM ITEM WHERE IDITEM = ' + QuotedStr(edtCod.Text);
+      Conn.execQuery(Sql, pCdsAux);
+      if pCdsAux.RecordCount > 0 then
+      begin
+        cdsProdutos.FieldByName('IDITEM').AsString   := pCdsAux;
+        cdsProdutos.FieldByName('DESCITEM').AsString := ''
+      end;
+    end
+    else
+    begin
+
+    end;
+  finally
+
+  end;
+
+end;
+
+end.

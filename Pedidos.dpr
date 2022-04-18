@@ -6,7 +6,9 @@ uses
   uMenuPrincipal in 'uMenuPrincipal.pas' {frmMenu},
   uConnect in 'uConnect.pas',
   uBinds in 'uBinds.pas',
-  uProdutos in 'uProdutos.pas' {frmProdutos};
+  uProdutos in 'uProdutos.pas' {frmProdutos},
+  uPedidos in 'uPedidos.pas' {FrmPedidos},
+  uPesqPedidos in 'uPesqPedidos.pas' {FrmPesqPedidos};
 
 {$R *.res}
 

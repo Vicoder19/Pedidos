@@ -1,0 +1,256 @@
+object FrmPedidos: TFrmPedidos
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 295
+  ClientWidth = 563
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object btnEditar: TButton
+    Position.X = 129.000000000000000000
+    Position.Y = 232.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Editar Produto'
+    OnClick = btnEditarClick
+  end
+  object btnExcluir: TButton
+    Position.X = 245.000000000000000000
+    Position.Y = 232.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Excluir Produto'
+  end
+  object btnSalvar: TButton
+    Position.X = 452.000000000000000000
+    Position.Y = 263.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Salvar Pedido'
+    OnClick = btnSalvarClick
+  end
+  object Label2: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 196.000000000000000000
+    Position.Y = 12.000000000000000000
+    Size.Width = 166.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 18.000000000000000000
+    Text = 'Inclus'#227'o de Pedido'
+  end
+  object grdProd: TGrid
+    Position.X = 8.000000000000000000
+    Position.Y = 109.000000000000000000
+    Size.Width = 544.000000000000000000
+    Size.Height = 115.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'gridstyle'
+    TabOrder = 6
+    RowCount = 100
+    RowHeight = 21.000000000000000000
+    Viewport.Width = 540.000000000000000000
+    Viewport.Height = 90.000000000000000000
+  end
+  object btnIncluir: TButton
+    Position.X = 9.000000000000000000
+    Position.Y = 232.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Incluir Produto'
+    OnClick = btnIncluirClick
+  end
+  object rctDados: TRectangle
+    Fill.Color = claNull
+    Position.X = 8.000000000000000000
+    Position.Y = 42.000000000000000000
+    Size.Width = 544.000000000000000000
+    Size.Height = 63.000000000000000000
+    Size.PlatformDefault = False
+    object btnAdd: TButton
+      Position.X = 508.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 29.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = '+'
+      OnClick = btnAddClick
+    end
+    object edtCod: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      FilterChar = '123456789'
+      Position.X = 78.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      OnExit = edtCodExit
+    end
+    object edtDescricao: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 2
+      ReadOnly = True
+      Position.X = 129.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 408.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object edtValUnit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      FilterChar = '123456789,.'
+      Position.X = 79.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      OnExit = edtValUnitExit
+    end
+    object Label1: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 8.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 62.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Produto:'
+    end
+    object Label3: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 8.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Valor Unit:'
+    end
+    object edtQtde: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 6
+      FilterChar = '123456789,.'
+      Position.X = 260.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      OnExit = edtQtdeExit
+    end
+    object Label4: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 175.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 89.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Quantidade:'
+    end
+    object edtTotalProd: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 8
+      ReadOnly = True
+      FilterChar = '123456789,.'
+      Position.X = 406.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 98.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      OnExit = edtQtdeExit
+    end
+    object Label5: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 366.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 41.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'Total:'
+    end
+  end
+  object edtTotal: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 8
+    ReadOnly = True
+    FilterChar = '123456789,.'
+    Position.X = 454.000000000000000000
+    Position.Y = 233.000000000000000000
+    Size.Width = 98.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    OnExit = edtQtdeExit
+  end
+  object Label6: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 351.000000000000000000
+    Position.Y = 233.000000000000000000
+    Size.Width = 102.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Total do Pedido:'
+  end
+  object ActionList1: TActionList
+    Left = 87
+    Top = 164
+    object actSair: TAction
+      Text = 'actSair'
+      ShortCut = 27
+      OnExecute = actSairExecute
+    end
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 155
+    Top = 163
+    object LinkGridToDataSourceBSprodutos: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BSprodutos
+      GridControl = grdProd
+      Columns = <>
+    end
+  end
+  object cdsProdutos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 311
+    Top = 162
+  end
+  object BSprodutos: TBindSourceDB
+    DataSet = cdsProdutos
+    ScopeMappings = <>
+    Left = 228
+    Top = 162
+  end
+  object cdsPedido: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 403
+    Top = 162
+  end
+  object BSPedido: TBindSourceDB
+    DataSet = cdsPedido
+    ScopeMappings = <>
+    Left = 475
+    Top = 164
+  end
+end
