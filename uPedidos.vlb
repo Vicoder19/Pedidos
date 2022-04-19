@@ -18,7 +18,7 @@ Coordinates=10,100,49,51
 Coordinates=76,100,64,51
 
 [BSprodutos]
-Coordinates=10,10,73,69
+Coordinates=500,10,73,69
 
 [edtDescricao]
 Coordinates=360,10,79,51
@@ -47,7 +47,7 @@ Visible=False
 Coordinates=672,1,141,33
 
 [frmProdutos.BSprodutos]
-Coordinates=497,1,137,69
+Coordinates=650,10,137,69
 
 [rctDados]
 Coordinates=497,89,58,33
@@ -85,5 +85,17 @@ Coordinates=107,259,61,51
 Coordinates=186,170,46,51
 
 [edtCliente]
-Coordinates=333,178,54,51
+Coordinates=333,178,64,51
+
+[Label7]
+Coordinates=40,10,46,51
+
+[edtNumero]
+Coordinates=255,170,68,51
+
+[dtEmissao]
+Coordinates=102,1,115,51
+
+[Label8]
+Coordinates=369,248,46,51
 

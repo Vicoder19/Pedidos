@@ -93,12 +93,13 @@ object FrmPedidos: TFrmPedidos
     object edtCod: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 1
-      FilterChar = '123456789'
+      FilterChar = '0123456789'
       Position.X = 78.000000000000000000
       Position.Y = 6.000000000000000000
       Size.Width = 48.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
+      OnKeyDown = edtCodKeyDown
       OnExit = edtCodExit
     end
     object edtDescricao: TEdit
@@ -114,7 +115,7 @@ object FrmPedidos: TFrmPedidos
     object edtValUnit: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 3
-      FilterChar = '123456789,.'
+      FilterChar = '0123456789,.'
       Position.X = 79.000000000000000000
       Position.Y = 30.000000000000000000
       Size.Width = 90.000000000000000000
@@ -145,7 +146,7 @@ object FrmPedidos: TFrmPedidos
     object edtQtde: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 6
-      FilterChar = '123456789,.'
+      FilterChar = '0123456789,.'
       Position.X = 260.000000000000000000
       Position.Y = 30.000000000000000000
       Size.Width = 90.000000000000000000
@@ -167,13 +168,12 @@ object FrmPedidos: TFrmPedidos
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 8
       ReadOnly = True
-      FilterChar = '123456789,.'
+      FilterChar = '0123456789,.'
       Position.X = 406.000000000000000000
       Position.Y = 30.000000000000000000
       Size.Width = 98.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      OnExit = edtQtdeExit
     end
     object Label5: TLabel
       StyledSettings = [Family, Style, FontColor]
@@ -194,7 +194,6 @@ object FrmPedidos: TFrmPedidos
     Size.Width = 325.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    OnExit = edtQtdeExit
   end
   object Label6: TLabel
     StyledSettings = [Family, Style, FontColor]
@@ -241,7 +240,6 @@ object FrmPedidos: TFrmPedidos
     Size.Width = 82.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    OnExit = edtQtdeExit
   end
   object ActionList1: TActionList
     Left = 87

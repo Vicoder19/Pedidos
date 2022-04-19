@@ -37,7 +37,6 @@ type
   private
     Conn : TConnection;
     Bind : TBinds;
-    BSProdutos2 : TBindSourceDB;
     LinkGrid : TLinkGridToDataSource;
     procedure BindCampos();
     procedure ControlaBotoes();
@@ -214,6 +213,7 @@ begin
   ControlaBotoes();
   Sql := 'SELECT * FROM ITEM';
   Conn.execQuery(Sql, CdsProdutos);
+  Conn.Conn.Connected := False;
   BindCampos();
   grdProd.Columns[0].Width := 100;
   grdProd.Columns[1].Width := 220;

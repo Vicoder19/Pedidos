@@ -54,6 +54,8 @@ type
     procedure edtQtdeExit(Sender: TObject);
     procedure edtValUnitExit(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure edtCodKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
   Bind : TBinds;
   BindPedido : TBinds;
@@ -113,7 +115,7 @@ begin
     Status := Edit;
     ControlaBotoes();
     CdsProdutos.Edit;
-    edtDescricao.SetFocus;
+    edtCod.SetFocus;
   end;
 end;
 
@@ -144,7 +146,7 @@ begin
   Status := Insert;
   ControlaBotoes();
   CdsProdutos.Append;
-  edtDescricao.SetFocus;
+  edtCod.SetFocus;
 end;
 
 procedure TFrmPedidos.btnSalvarClick(Sender: TObject);
@@ -263,14 +265,21 @@ end;
 
 procedure TFrmPedidos.edtCodExit(Sender: TObject);
 begin
-  if (Status in [Edit, Insert]) then
-  begin
-    if not validaProduto() then
-    begin
-      (TEdit(Sender) as IControl).DoEnter;
-      abort
-    end;
-  end;
+//  if (Status in [Edit, Insert]) then
+//  begin
+//    if not validaProduto() then
+//    begin
+//      (TEdit(Sender) as IControl).DoEnter;
+//      abort
+//    end;
+//  end;
+end;
+
+procedure TFrmPedidos.edtCodKeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = vkReturn then
+    validaProduto();
 end;
 
 procedure TFrmPedidos.edtQtdeExit(Sender: TObject);
@@ -302,8 +311,13 @@ begin
 
   if Status <> Browse then
   begin
-    Sql := 'SELECT * FROM PEDIDOCAB WHERE IDPEDIDOCAB = 0';
+    Sql := 'SELECT P.*, I.DESCITEM FROM PEDIDOITEM AS P INNER JOIN ITEM AS I ON P.IDITEM = I.IDITEM';
     Conn.execQuery(Sql, CdsProdutos);
+    cdsProdutos.Fields.FindField('DESCITEM').ReadOnly := False;
+    Sql := 'SELECT * FROM PEDIDOCAB WHERE IDPEDIDOCAB = 0';
+    Conn.execQuery(Sql, cdsPedido);
+
+    cdsPedido.Append;
   end;
 
   BindCampos();
@@ -319,9 +333,10 @@ frmProdutos : TfrmProdutos;
 begin
   Result := False;
 
-  if edtCod.Text.Trim = EmptyStr then
+  if edtCod.Text.Trim <> EmptyStr then
   begin
     try
+      CdsAux := TClientDataSet.Create(nil);
       Sql := 'SELECT * FROM ITEM WHERE IDITEM = ' + QuotedStr(edtCod.Text);
       Conn.execQuery(Sql, CdsAux);
       if CdsAux.RecordCount > 0 then
