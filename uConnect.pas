@@ -6,7 +6,7 @@ FireDAC.Phys.FB, FireDAC.Comp.Client, System.Classes, FireDAC.DApt, FireDAC.Stan
   Datasnap.DBClient, System.StrUtils;
 
 type
-TStatus = (Insert, Edit, Default);
+TStatus = (Insert, Edit, Default, Browse);
 TConnection = class(TComponent)
   FBDriver: TFDPhysFBDriverLink;
   Conn: TFDConnection;
@@ -14,7 +14,7 @@ TConnection = class(TComponent)
   Provider : TDataSetProvider;
   public
   function conectar() : Boolean;
-  function execQuery(pSQL : string; pCds : TClientDataSet) : boolean;
+  function execQuery(pSQL : string; pCds : TClientDataSet = nil) : boolean;
   function nextId(pTabela, pCampo : string) : Integer;
   constructor Create(AOwner: TComponent); override;
   destructor Destroy();
@@ -62,7 +62,7 @@ begin
   FreeAndNil(Trans);
 end;
 
-function TConnection.execQuery(pSQL : string; pCds : TClientDataSet) : boolean;
+function TConnection.execQuery(pSQL : string; pCds : TClientDataSet = nil) : boolean;
 var
   Query : TFDQuery;
 begin

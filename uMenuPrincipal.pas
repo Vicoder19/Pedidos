@@ -18,6 +18,7 @@ type
     miPedidos: TMenuItem;
     miItens: TMenuItem;
     procedure miItensClick(Sender: TObject);
+    procedure miPedidosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +31,7 @@ var
 implementation
 
 uses
-  Datasnap.DBClient, uProdutos;
+  Datasnap.DBClient, uProdutos, uPedidos;
 
 {$R *.fmx}
 
@@ -50,12 +51,21 @@ begin
 
 end;
 
+procedure TfrmMenu.miPedidosClick(Sender: TObject);
+var
+frmPedidos : TFrmPedidos;
+begin
+  try
+    frmPedidos        := TFrmPedidos.Create(nil);
+    frmPedidos.Status := TStatus.Default;
+    frmPedidos.ShowModal;
+  finally
+    FreeAndNil(frmPedidos);
+  end;
+end;
+
 end.
 
-{
-  if pQtdeDecimais_Max6 in [1,2] then
-        TFloatField(vpCdsPreenchido.FieldByName(pNomeCampoFloat)).DisplayFormat  :=  '###,###,##0.00';
-}
 
 
 

@@ -49,6 +49,7 @@ object frmProdutos: TfrmProdutos
     Position.Y = 232.000000000000000000
     TabOrder = 4
     Text = 'Excluir'
+    OnClick = btnExcluirClick
   end
   object btnSalvar: TButton
     Position.X = 272.000000000000000000
@@ -75,6 +76,7 @@ object frmProdutos: TfrmProdutos
     Size.PlatformDefault = False
     StyleLookup = 'gridstyle'
     TabOrder = 8
+    OnDblClick = grdProdDblClick
     RowCount = 100
     RowHeight = 21.000000000000000000
     Viewport.Width = 341.000000000000000000
