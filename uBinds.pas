@@ -94,4 +94,41 @@ begin
   inherited;
 end;
 
+{
+  LinkGrid := TLinkGridToDataSource.Create(BindingsList1);
+  LinkGrid.Name         := 'LinkGrid';
+  LinkGrid.GridControl  := Grid;
+  BSGrid                := TBindSourceDB.Create(Self);
+  BSGrid.DataSet        := CDS
+  LinkGrid.DataSource   := BSGrid;
+
+  LinkGrid.Columns.Add;
+  LinkGrid.Columns.Add;
+  LinkGrid.Columns.Add;
+  LinkGrid.Columns.Add;
+  LinkGrid.Columns.Add;
+  LinkGrid.Columns.Add;
+  LinkGrid.Columns[0].MemberName  := 'mp_parcela';
+  LinkGrid.Columns[0].Header      := 'Parcela';
+  LinkGrid.Columns[0].Width       := 90;
+  LinkGrid.Columns[1].MemberName  := 'mp_valor';
+  LinkGrid.Columns[1].Header      := 'Valor';
+  LinkGrid.Columns[1].Width       := 90;
+  LinkGrid.Columns[2].MemberName  := 'mp_vencimento';
+  LinkGrid.Columns[2].Header      := 'Vencimento';
+  LinkGrid.Columns[2].Width       := 90;
+  LinkGrid.Columns[3].MemberName  := 'xx_pag_descricao';
+  LinkGrid.Columns[3].Header      := 'Tipo Pagamento';
+  LinkGrid.Columns[3].Width       := 200;
+  LinkGrid.Columns[4].MemberName  := 'mp_proporcao';
+  LinkGrid.Columns[4].Header      := 'Proporção';
+  LinkGrid.Columns[4].Width       := 90;
+  LinkGrid.Columns[5].MemberName  := 'xx_mp_editada';
+  LinkGrid.Columns[5].Header      := 'Editada';
+  LinkGrid.Columns[5].Width       := 90;
+
+  LinkGrid.AutoActivate := False;
+  LinkGrid.Active       := True;
+}
+
 end.
