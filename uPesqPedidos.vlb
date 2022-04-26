@@ -1,0 +1,9 @@
+﻿[cdsPedidos]
+Visible=False
+
+[FrmPedidos.cdsProdutos]
+Visible=False
+
+[FrmPedidos.cdsPedido]
+Visible=False
+

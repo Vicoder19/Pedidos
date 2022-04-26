@@ -30,6 +30,7 @@ type
     Label3: TLabel;
     procedure FormShow(Sender: TObject);
     procedure grdPedidosDblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
   Conn : TConnection;
     { Private declarations }
@@ -46,11 +47,19 @@ implementation
 
 uses uPedidos;
 
+procedure TFrmPesqPedidos.FormCreate(Sender: TObject);
+begin
+  Conn           := TConnection.Create(self);
+  Conn.conectar;
+  //Bind           := TBinds.Create(CdsProdutos);
+  //Status         := Default;
+end;
+
 procedure TFrmPesqPedidos.FormShow(Sender: TObject);
 var
 Sql : string;
 begin
-  Sql := 'SELECT * FROM ITEM';
+  Sql := 'SELECT * FROM PEDIDOCAB';
   Conn.execQuery(Sql, cdsPedidos);
   grdPedidos.Columns[0].Width := 100;
   grdPedidos.Columns[1].Width := 220;
@@ -62,7 +71,7 @@ FrmPedido : TFrmPedidos;
 begin
   try
     FrmPedido := TFrmPedidos.Create(nil);
-    FrmPedido.cdsProdutos.Data := cdsPedidos.Data;
+    FrmPedido.cdsPedido.Data := cdsPedidos.Data;
     FrmPedido.Pesquisa := True;
     FrmPedido.ShowModal;
   finally

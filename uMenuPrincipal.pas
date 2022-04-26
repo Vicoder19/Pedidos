@@ -17,8 +17,10 @@ type
     Menu: TMenuItem;
     miPedidos: TMenuItem;
     miItens: TMenuItem;
+    miPesqPedidos: TMenuItem;
     procedure miItensClick(Sender: TObject);
     procedure miPedidosClick(Sender: TObject);
+    procedure miPesqPedidosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,7 +33,7 @@ var
 implementation
 
 uses
-  Datasnap.DBClient, uProdutos, uPedidos;
+  Datasnap.DBClient, uProdutos, uPedidos, uPesqPedidos;
 
 {$R *.fmx}
 
@@ -62,6 +64,20 @@ begin
   finally
     FreeAndNil(frmPedidos);
   end;
+end;
+
+procedure TfrmMenu.miPesqPedidosClick(Sender: TObject);
+var
+frmPedidos : TFrmPesqPedidos;
+begin
+  try
+    frmPedidos        := TFrmPesqPedidos.Create(nil);
+    //frmPedidos.Status := TStatus.Default;
+    frmPedidos.ShowModal;
+  finally
+    FreeAndNil(frmPedidos);
+  end;
+
 end;
 
 end.

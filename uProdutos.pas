@@ -100,7 +100,7 @@ begin
       cdsProdutos.Delete;
     end
     else
-      ShowMessage('É necessário remover este item do pedido Nº ' + QuotedStr(Cds.FieldByName('NUMERO').AsString));
+      ShowMessage('É necessário remover este item do pedido.');
   finally
     FreeAndNil(Cds);
   end;
@@ -197,8 +197,6 @@ begin
 end;
 
 procedure TfrmProdutos.FormCreate(Sender: TObject);
-var
-Sql : string;
 begin
   Conn           := TConnection.Create(self);
   Conn.conectar;

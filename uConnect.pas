@@ -68,16 +68,15 @@ var
 begin
   try
     Query := TFDQuery.Create(nil);
-
-    Query.Connection := Conn;
     Query.Transaction := Conn.Transaction;
+    Query.Connection := Conn;
     Query.SQL.Text := pSQL;
 
     if (AnsiContainsStr(pSQL,'RETURNING')) or (AnsiContainsStr(pSQL, 'SELECT')) then
     begin
       Query.Open(pSQL);
       Provider.DataSet := Query;
-      pCds.Data := Provider.Data;
+      pCds.Data        := Provider.Data;
     end
     else
       Query.ExecSQL;

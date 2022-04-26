@@ -29,6 +29,7 @@ object FrmPedidos: TFrmPedidos
     Size.PlatformDefault = False
     TabOrder = 2
     Text = 'Excluir Produto'
+    OnClick = btnExcluirClick
   end
   object btnSalvar: TButton
     Position.X = 452.000000000000000000

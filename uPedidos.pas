@@ -56,6 +56,7 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure edtCodKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure btnExcluirClick(Sender: TObject);
   private
   Bind : TBinds;
   BindPedido : TBinds;
@@ -119,6 +120,12 @@ begin
   end;
 end;
 
+procedure TFrmPedidos.btnExcluirClick(Sender: TObject);
+begin
+  if (Pesquisa = False) and (cdsProdutos.RecordCount > 0) then
+    cdsProdutos.Delete;
+end;
+
 procedure TFrmPedidos.btnAddClick(Sender: TObject);
 begin
   if edtQtde.Text.Trim = EmptyStr then
@@ -179,7 +186,7 @@ begin
   begin
     try
       Cds := TClientDataSet.Create(nil);
-      Sql := 'INSERT INTO PEDIDOCAB (DTEMISSAO, CLIENTE, NUMERO) VALUES ('+ QuotedStr(dtEmissao.Text) + ',' + QuotedStr(edtCliente.Text) + ',' +
+      Sql := 'INSERT INTO PEDIDOCAB (DTEMISSAO, CLIENTE, NUMERO) VALUES ('+ QuotedStr(DateTimeToStr(cdsPedido.FieldByName('DTEMISSAO').AsDateTime)) + ',' + QuotedStr(edtCliente.Text) + ',' +
               QuotedStr(edtNumero.Text)+ ') RETURNING IDPEDIDOCAB';
       Conn.execQuery(Sql, Cds);
       cdsPedido.Edit;
@@ -195,8 +202,8 @@ begin
       Qtde       := cdsProdutos.FieldByName('QUANTIDADE').AsInteger;
       ValorUnit  := cdsProdutos.FieldByName('VALORUNIT').AsFloat;
       ValorTotal := cdsProdutos.FieldByName('VALORTOTAL').AsFloat;
-      Sql := 'INSERT INTO PEDIDOITEM (IDITEM, QUANTIDADE, VALORUNIT, VALORTOTAL) VALUES ('+ QuotedStr(cdsProdutos.FieldByName('IDITEM').AsString) + ',' +
-              QuotedStr(FloatToStr(Qtde)) + ',' + QuotedStr(FloatToStr(ValorUnit)) + ',' +QuotedStr(FloatToStr(ValorTotal)) + ')';
+      Sql := 'INSERT INTO PEDIDOITEM (IDITEM, QUANTIDADE, VALORUNIT, VALORTOTAL, IDPEDIDOCAB) VALUES ('+ QuotedStr(cdsProdutos.FieldByName('IDITEM').AsString) + ',' +
+              QuotedStr(FloatToStr(Qtde)) + ',' + QuotedStr(FloatToStr(ValorUnit)) + ',' +QuotedStr(FloatToStr(ValorTotal)) + ',' +QuotedStr(cdsPedido.FieldByName('IDPEDIDOCAB').AsString)+')';
 
       Conn.execQuery(Sql);
       cdsProdutos.Next;
@@ -208,8 +215,6 @@ begin
     try
 
       ShowMessage('Operação Concluída');
-
-      CdsProdutos.Post;
 
       Status := Default;
       ControlaBotoes();
@@ -311,13 +316,13 @@ begin
 
   if Status <> Browse then
   begin
-    Sql := 'SELECT P.*, I.DESCITEM FROM PEDIDOITEM AS P INNER JOIN ITEM AS I ON P.IDITEM = I.IDITEM';
+    Sql := 'SELECT P.IDITEM, P.QUANTIDADE, P.VALORUNIT, P.VALORTOTAL, I.DESCITEM FROM PEDIDOITEM AS P INNER JOIN ITEM AS I ON P.IDITEM = I.IDITEM WHERE P.IDITEM = 0';
     Conn.execQuery(Sql, CdsProdutos);
     cdsProdutos.Fields.FindField('DESCITEM').ReadOnly := False;
     Sql := 'SELECT * FROM PEDIDOCAB WHERE IDPEDIDOCAB = 0';
     Conn.execQuery(Sql, cdsPedido);
 
-    cdsPedido.Append;
+    cdsPedido.Insert;
   end;
 
   BindCampos();
