@@ -1,7 +1,7 @@
 object FrmPedidos: TFrmPedidos
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Pedidos'
   ClientHeight = 302
   ClientWidth = 563
   Position = ScreenCenter

@@ -42,13 +42,6 @@ Coordinates=10,168,46,51
 [btnAdd]
 Coordinates=157,100,50,51
 
-[frmProdutos.cdsProdutos]
-Visible=False
-Coordinates=672,1,141,33
-
-[frmProdutos.BSprodutos]
-Coordinates=650,10,137,69
-
 [rctDados]
 Coordinates=497,89,58,33
 

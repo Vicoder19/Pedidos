@@ -1,41 +1,41 @@
 ﻿[btnEditar]
-Coordinates=80,10,59,51
+Coordinates=80,10,66,58
 
 [Label2]
-Coordinates=191,78,46,51
+Coordinates=191,78,53,58
 
 [BindingsList1]
-Coordinates=290,1,82,33
+Coordinates=290,1,91,36
 
 [ActionList1]
-Coordinates=290,56,70,33
+Coordinates=290,56,78,36
 
 [btnSalvar]
-Coordinates=156,10,61,51
+Coordinates=156,10,69,58
 
 [actSair]
-Coordinates=53,173,48,33
+Coordinates=53,173,55,36
 
 [edtDescricao]
-Coordinates=10,78,79,51
+Coordinates=10,78,90,58
 
 [Label1]
-Coordinates=235,10,46,51
+Coordinates=235,10,53,58
 
 [btnExcluir]
-Coordinates=110,78,64,51
+Coordinates=110,78,71,58
 
 [btnIncluir]
-Coordinates=298,10,61,51
+Coordinates=298,10,67,58
 
 [grdProd]
-Coordinates=10,10,54,51
+Coordinates=10,10,60,58
 Visible=True
 
 [BSprodutos]
-Coordinates=220,160,73,69
+Coordinates=220,160,82,80
 
 [cdsProdutos]
-Coordinates=220,160,77,33
+Coordinates=220,160,86,36
 Visible=False
 

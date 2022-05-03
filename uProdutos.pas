@@ -120,6 +120,7 @@ var
 Sql : string;
 Cds : TClientDataSet;
 begin
+
   if edtDescricao.Text.Trim = EmptyStr then
   begin
     ShowMessage('A descrição do produto deve ser informada');
@@ -211,7 +212,6 @@ begin
   ControlaBotoes();
   Sql := 'SELECT * FROM ITEM';
   Conn.execQuery(Sql, CdsProdutos);
-  Conn.Conn.Connected := False;
   BindCampos();
   grdProd.Columns[0].Width := 100;
   grdProd.Columns[1].Width := 220;

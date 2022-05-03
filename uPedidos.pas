@@ -70,6 +70,7 @@ type
     { Public declarations }
   Status : TStatus;
   Pesquisa : Boolean;
+  IdPedido : string;
 
   end;
 
@@ -166,7 +167,7 @@ begin
   if Pesquisa = True then
   begin
     Sql := 'UPDATE PEDIDOCAB SET (DTEMISSAO, CLIENTE, NUMERO) = ('+
-            QuotedStr(dtEmissao.Text) + ',' + QuotedStr(edtCliente.Text) + ',' + QuotedStr(edtNumero.Text)+ ')';
+            QuotedStr(FormatDateTime('MM/dd/yyyy', cdsPedido.FieldByName('DTEMISSAO').AsDateTime)) + ',' + QuotedStr(edtCliente.Text) + ',' + QuotedStr(edtNumero.Text)+ ')';
     Conn.execQuery(Sql);
     while not cdsProdutos.Eof do
     begin
@@ -186,7 +187,8 @@ begin
   begin
     try
       Cds := TClientDataSet.Create(nil);
-      Sql := 'INSERT INTO PEDIDOCAB (DTEMISSAO, CLIENTE, NUMERO) VALUES ('+ QuotedStr(DateTimeToStr(cdsPedido.FieldByName('DTEMISSAO').AsDateTime)) + ',' + QuotedStr(edtCliente.Text) + ',' +
+
+      Sql := 'INSERT INTO PEDIDOCAB (DTEMISSAO, CLIENTE, NUMERO) VALUES ('+ QuotedStr(FormatDateTime('MM/dd/yyyy', cdsPedido.FieldByName('DTEMISSAO').AsDateTime)) + ',' + QuotedStr(edtCliente.Text) + ',' +
               QuotedStr(edtNumero.Text)+ ') RETURNING IDPEDIDOCAB';
       Conn.execQuery(Sql, Cds);
       cdsPedido.Edit;
@@ -301,6 +303,7 @@ end;
 
 procedure TFrmPedidos.FormCreate(Sender: TObject);
 begin
+  IdPedido := '0';
   Conn           := TConnection.Create(self);
   Conn.conectar;
   Bind           := TBinds.Create(CdsProdutos);
@@ -314,20 +317,21 @@ Sql : string;
 begin
   ControlaBotoes();
 
-  if Status <> Browse then
-  begin
-    Sql := 'SELECT P.IDITEM, P.QUANTIDADE, P.VALORUNIT, P.VALORTOTAL, I.DESCITEM FROM PEDIDOITEM AS P INNER JOIN ITEM AS I ON P.IDITEM = I.IDITEM WHERE P.IDITEM = 0';
-    Conn.execQuery(Sql, CdsProdutos);
-    cdsProdutos.Fields.FindField('DESCITEM').ReadOnly := False;
-    Sql := 'SELECT * FROM PEDIDOCAB WHERE IDPEDIDOCAB = 0';
-    Conn.execQuery(Sql, cdsPedido);
+  Sql := 'SELECT P.IDITEM, I.DESCITEM, P.QUANTIDADE, P.VALORUNIT, P.VALORTOTAL FROM PEDIDOITEM AS P INNER JOIN ITEM AS I ON P.IDITEM = I.IDITEM WHERE P.IDITEM = ' + QuotedStr(IdPedido);
+  Conn.execQuery(Sql, CdsProdutos);
+  cdsProdutos.Fields.FindField('DESCITEM').ReadOnly := False;
+  Sql := 'SELECT * FROM PEDIDOCAB WHERE IDPEDIDOCAB = ' + QuotedStr(IdPedido);
+  Conn.execQuery(Sql, cdsPedido);
 
+  if cdsPedido.IsEmpty = True then
     cdsPedido.Insert;
-  end;
 
   BindCampos();
   grdProd.Columns[0].Width := 100;
-  grdProd.Columns[1].Width := 220;
+  grdProd.Columns[1].Width := 164;
+  grdProd.Columns[2].Width := 80;
+  grdProd.Columns[3].Width := 100;
+  grdProd.Columns[4].Width := 100;
 end;
 
 function TFrmPedidos.validaProduto: Boolean;
